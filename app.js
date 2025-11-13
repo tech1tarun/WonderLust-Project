@@ -49,9 +49,11 @@ app.use(session(sessionOptions));
 app.use(flash());
 
 app.use((req, res, next) => {
-  console.log(req.flash);
-
+  // console.log(req.flash);
+  // res.locals.success = req.flash("success");
+  // next();
   res.locals.success = req.flash("success");
+  res.locals.error = req.flash("error");
   next();
 });
 
