@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require("../models/user");
 const wrapAsync = require("../utils/wrapAsync");
 const passport = require("passport");
+const { route } = require("./listing");
 
 router.get("/signup", (req, res) => {
   res.render("users/signup.ejs");
@@ -41,5 +42,15 @@ router.post(
     res.redirect("/listings");
   }
 );
+
+router.get("/logout", (req, res, next) => {
+  req.logOut((err) => {
+    if (err) {
+      return next(err);
+    }
+    req.flash("success", "You are logged out !!");
+  });
+  res.redirect("/listings");
+});
 
 module.exports = router;
