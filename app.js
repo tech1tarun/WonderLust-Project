@@ -52,17 +52,17 @@ app.get("/", (req, res) => {
 app.use(session(sessionOptions));
 app.use(flash());
 
+//we use session first here because a single user do not need to log in again n again it become a single session
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+
 app.use((req, res, next) => {
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
   res.locals.currUser = req.user;
   next();
-});
-
-//we use session first here because a single user do not need to log in again n again it become a single session
-app.use(passport.initialize());
-app.use(passport.session());
-passport.use(new LocalStrategy(User.authenticate()));
+}); 
 
 /*authenticate() Generates a function that is used in Passport's LocalStrategy
 serializeUser() Generates a function that is used by Passport to serialize users into the session

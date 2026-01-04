@@ -36,7 +36,9 @@ router.get(
   "/:id",
   wrapAsyn(async (req, res) => {
     let { id } = req.params;
-    const listing = await Listing.findById(id).populate("reviews");
+    const listing = await Listing.findById(id)
+      .populate("reviews")
+      .populate("owner");
     if (!listing) {
       req.flash("error", "Listing you requested for does not exist");
       return res.redirect("/listings");
@@ -54,6 +56,7 @@ router.post(
     //passing an instance on listing
     //try beacuse of error handling then try is replace by warapAsync function
     const newListing = new Listing(req.body.listing);
+    newListing.owner = req.user._id;
     await newListing.save();
     req.flash("success", "New Listing Created");
     res.redirect("/listings");

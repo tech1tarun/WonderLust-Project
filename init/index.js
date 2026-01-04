@@ -20,7 +20,11 @@ async function main() {
 
 const initDB = async () => {
   await Listing.deleteMany({}); //this will delete all data from chats in database
-  await Listing.insertMany(initData.data); //this will store all data to chats in database
+  initData.data = initData.data.map((obj) => ({
+    ...obj,
+    owner: "6958d75c47eab95036b183a5",
+  }));
+  await Listing.insertMany(initData.data); //this will store all data to chats in databnodemon aase
   console.log("data was initialise");
 };
 
