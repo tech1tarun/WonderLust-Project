@@ -9,6 +9,7 @@
       method="post"
       novalidate
       class="needs-validation"
+      enctype="multipart/form-data"
     >
       <div class="mb-3">
         <label for="title" class="form-label">Title</label>
@@ -37,15 +38,16 @@
       </div>
 
       <div class="mb-3">
-        <label for="image" class="form-label">Image</label>
-        <input
-          type="text"
-          name="listing[image]"
-          value="<%= listing.image %>"
-          class="form-control"
-          required
+        Original Image:<br />
+        <img
+          src="<%= originalImageUrl %>"
+          style="max-width: 200px; max-height: 200px"
         />
-        <div class="invalid-feedback">Please enter a Image url</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="image" class="form-label">Upload New Image</label>
+        <input type="file" name="listing[image]" class="form-control" />
       </div>
 
       <div class="row">

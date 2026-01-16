@@ -7,7 +7,7 @@
   </div>
   <div class="card col-6 offset-3 show-card listing-card">
     <img
-      src="<%= listing.image %>"
+      src="<%= listing.image.url %>"
       class="card-img-top show-img"
       alt="listing_image"
     />
@@ -25,7 +25,7 @@
 
 <br />
 
-<% if(currUser && listing.owner._id.equals(currUser)){ %>
+<% if(currUser && listing.owner._id.equals(currUser._id )){ %>
 
 <div class="btns">
   <a
@@ -34,11 +34,16 @@
     >Edit</a
   >
 
-  <form action="/listings/<%= listing._id%>?_method=DELETE" method="post">
+  <form
+    action="/listings/<%= listing._id%>?_method=DELETE"
+    method="post"
+    enctype="multipart/form-data"
+  >
     <button class="btn btn-dark offset-5 edit-btn">Delete</button>
   </form>
 </div>
 <% } %>
+
 <div class="col-8 offset-3 mb-3">
   <hr />
   <% if(currUser){ %>
@@ -68,7 +73,7 @@
           id="no-rate"
           class="input-no-rate"
           name="review[rating]"
-          value="0"
+          value="1"
           checked
           aria-label="No rating."
         />
