@@ -45,9 +45,9 @@ const sessionOptions = {
   },
 };
 
-app.get("/", (req, res) => {
-  res.send("working in root");
-});
+// app.get("/", (req, res) => {
+//   res.send("working in root");
+// });
 
 app.use(session(sessionOptions));
 app.use(flash());
@@ -62,7 +62,7 @@ app.use((req, res, next) => {
   res.locals.error = req.flash("error");
   res.locals.currUser = req.user;
   next();
-}); 
+});
 
 /*authenticate() Generates a function that is used in Passport's LocalStrategy
 serializeUser() Generates a function that is used by Passport to serialize users into the session
